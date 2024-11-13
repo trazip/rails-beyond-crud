@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :restaurants do
+  resources :restaurants, shallow: true do
     collection do
       get :top
     end
@@ -7,5 +7,9 @@ Rails.application.routes.draw do
     member do
       get :chef
     end
+    
+    resources :reviews, only: %i[ new create destroy ]
   end
+
+  # resources :reviews, only: :destroy
 end
